@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+git clone 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Navigate to project directory
+cd <project-name>
 
-## Available Scripts
+# Install dependencies
+npm install
 
-In the project directory, you can run:
+# Start the development server
+npm start
 
-### `npm start`
+Important Notes:
+The development server will automatically open your default browser to http://localhost:3000
+Any changes you make to the code will automatically reload in the browser
+Check the package.json file for specific scripts and dependencies
+Make sure you're in the project directory when running npm commands
+Common Issues:
+If npm start fails, try deleting the node_modules folder and package-lock.json file, then run npm install again
+Check if all required environment variables are set (if any)
+Make sure all required ports are available (default is 3000)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+Core Features
+Country Listing:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-Displays a list of countries with their flags and basic information
+-Supports infinite scrolling
+-Includes filtering by name and continent
+-Sorting capabilities by name, population, and area
+-Shows current weather for each country's capital
 
-### `npm run build`
+Country Details:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-Detailed view for each country showing:
+-National flag
+-Basic information (capital, languages, currency)
+-Population and timezones
+-Neighboring countries
+States/regions (subdivisions)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Architecture:
+1-Data Sources
+-GraphQL API for basic country data (using Apollo Client)
+-REST Countries API for additional country details
+-OpenWeatherMap API for weather information
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2-Component Structure
+-App: Main routing component
+-CountryList: List view with filtering and sorting
+CountryDetails: Detailed country view
+-WeatherInfo: Weather information component
 
-### `npm run eject`
+3-State Management
+-Custom hooks for business logic (useCountryList, useCountryDetails, useWeatherInfo)
+-Apollo Client for GraphQL state
+-Local state using React hooks
+4-Styling
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-Uses Tailwind CSS for styling
+-Responsive design with mobile-first approach
+-Modern UI with cards, gradients, and smooth transitions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Technical Implementation:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+-TypeScript for type safety
+-React Router for navigation
+-Axios for REST API calls
+-Environment variables for API keys
+-Custom type definitions for better type safety
+-Component separation following container/presenter pattern
+-Error handling and loading states
