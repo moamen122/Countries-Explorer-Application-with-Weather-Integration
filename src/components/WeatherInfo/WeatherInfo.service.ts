@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { WeatherData } from '../../types/Weather.type';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { WeatherData } from "../../types/Weather.type";
 
 export const useWeatherInfo = (city: string) => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -12,7 +12,7 @@ export const useWeatherInfo = (city: string) => {
       try {
         const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
         if (!apiKey) {
-          throw new Error('API key for weather service is not set.');
+          throw new Error("API key for weather service is not set.");
         }
 
         const response = await axios.get<WeatherData>(
@@ -20,14 +20,14 @@ export const useWeatherInfo = (city: string) => {
           {
             params: {
               q: city,
-              units: 'metric',
+              units: "metric",
               appid: apiKey,
             },
           }
         );
         setWeather(response.data);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch weather data.');
+        setError(err.message || "Failed to fetch weather data.");
       } finally {
         setLoading(false);
       }

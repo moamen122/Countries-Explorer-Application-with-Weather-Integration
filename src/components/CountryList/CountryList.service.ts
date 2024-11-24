@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { fetchRestCountryData } from '../../api/countries.api';
-import { CountryData } from '../../types/Country.type';
+import { useState, useEffect, useMemo } from "react";
+import { useQuery, gql } from "@apollo/client";
+import { fetchRestCountryData } from "../../api/countries.api";
+import { CountryData } from "../../types/Country.type";
 
 const GET_COUNTRIES = gql`
   query GetCountries {
@@ -20,10 +20,12 @@ const GET_COUNTRIES = gql`
 `;
 
 export const useCountryList = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedContinent, setSelectedContinent] = useState('');
-  const [sortBy, setSortBy] = useState('name');
-  const [countriesData, setCountriesData] = useState<Record<string, { population: number; area: number }>>({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedContinent, setSelectedContinent] = useState("");
+  const [sortBy, setSortBy] = useState("name");
+  const [countriesData, setCountriesData] = useState<
+    Record<string, { population: number; area: number }>
+  >({});
   const [visibleCount, setVisibleCount] = useState(20);
   const { loading, error, data } = useQuery(GET_COUNTRIES);
 
@@ -31,12 +33,12 @@ export const useCountryList = () => {
     const fetchAllCountriesData = async () => {
       if (data?.countries) {
         const newCountriesData: Record<string, any> = {};
-    
+
         const promises = data.countries.map(async (country: CountryData) => {
           await fetchRestCountryData(country.code, (countryData) => {
             newCountriesData[country.code] = {
               population: countryData.population,
-              area: countryData.area
+              area: countryData.area,
             };
           });
         });
@@ -62,20 +64,20 @@ export const useCountryList = () => {
       );
     }
     if (selectedContinent) {
-      filtered = filtered.filter((country: any) =>
-        country.continent.name === selectedContinent
+      filtered = filtered.filter(
+        (country: any) => country.continent.name === selectedContinent
       );
     }
 
     return [...filtered].sort((a: any, b: any) => {
       switch (sortBy) {
-        case 'name':
+        case "name":
           return a.name.localeCompare(b.name);
-        case 'population':
+        case "population":
           const populationA = countriesData[a.code]?.population || 0;
           const populationB = countriesData[b.code]?.population || 0;
           return populationB - populationA;
-        case 'area':
+        case "area":
           const areaA = countriesData[a.code]?.area || 0;
           const areaB = countriesData[b.code]?.area || 0;
           return areaB - areaA;
@@ -87,11 +89,13 @@ export const useCountryList = () => {
 
   const continents = useMemo(() => {
     if (!data?.countries) return [];
-    return Array.from(new Set(data.countries.map((country: any) => country.continent.name)));
+    return Array.from(
+      new Set(data.countries.map((country: any) => country.continent.name))
+    );
   }, [data]);
 
   const loadMore = () => {
-    setVisibleCount(prev => prev + 20);
+    setVisibleCount((prev) => prev + 20);
   };
 
   const hasMore = visibleCount < filteredAndSortedCountries.length;
@@ -110,7 +114,7 @@ export const useCountryList = () => {
     continents,
     hasMore,
     loadMore,
-    totalCount: filteredAndSortedCountries.length
+    totalCount: filteredAndSortedCountries.length,
   };
 };
 

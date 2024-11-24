@@ -1,12 +1,15 @@
-git clone 
+git clone
 
 # Navigate to project directory
+
 cd <project-name>
 
 # Install dependencies
+
 npm install
 
 # Start the development server
+
 npm start
 
 Important Notes:
@@ -18,8 +21,6 @@ Common Issues:
 If npm start fails, try deleting the node_modules folder and package-lock.json file, then run npm install again
 Check if all required environment variables are set (if any)
 Make sure all required ports are available (default is 3000)
-
-
 
 Core Features
 Country Listing:

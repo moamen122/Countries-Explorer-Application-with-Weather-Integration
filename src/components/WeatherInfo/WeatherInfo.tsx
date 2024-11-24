@@ -1,6 +1,6 @@
-import React from 'react';
-import { WeatherInfoProps } from '../../types/Weather.type';
-import { useWeatherInfo } from './WeatherInfo.service';
+import React from "react";
+import { WeatherInfoProps } from "../../types/Weather.type";
+import { useWeatherInfo } from "./WeatherInfo.service";
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({ city }) => {
   const { weather, loading, error } = useWeatherInfo(city);
@@ -10,7 +10,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({ city }) => {
   if (!weather) return null;
 
   return (
-    <div style={{ marginTop: '5px' }}>
+    <div style={{ marginTop: "5px" }}>
       <p>Temperature: {weather.main.temp}°C</p>
       <p>Condition: {weather.weather[0].description}</p>
       <img
