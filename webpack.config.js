@@ -63,7 +63,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      favicon: "./public/favicon.ico", // if you have a favicon
+      favicon: "./public/favicon.ico",
       inject: true,
       minify: {
         removeComments: true,
@@ -83,7 +83,7 @@ module.exports = {
       chunkFilename: "styles/[id].[contenthash].css",
     }),
     new Dotenv({
-      systemvars: true, // load all system variables
+      systemvars: true,
     }),
   ],
   optimization: {
